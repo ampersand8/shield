@@ -71,21 +71,21 @@ cat > ${SHIELD_CORE}/rc/shield-core <<'EOF'
 #!/bin/sh
 export PATH=/shield/bin:/shield/plugins:/bin:/usr/bin
 
-shield-schema --database /shield/data/db
+shield-schema --database /shield/data/shield.db
 
 shieldd --config /shield/etc/shieldd.conf --log-level debug > /var/log/shield-core.log
 EOF
 chmod 755 ${SHIELD_CORE}/rc/shield-core
 cat > ${SHIELD_CORE}/etc/shieldd.conf <<'EOF'
-listen_addr:   0.0.0.0:8181
-database:      /shield/data/db
-private_key:   /shield/etc/core.ssh
-workers:       3
-max_timeout:   10
-web_root:      /shield/www
-slow_loop:     300
-fast_loop:     2
-vault_keyfile: /shield/data/crypt
+listen_addr:    0.0.0.0:8181
+data_directory: /shield/data
+private_key:    /shield/etc/core.ssh
+workers:        3
+max_timeout:    10
+web_root:       /shield/www
+slow_loop:      300
+fast_loop:      2
+vault_keyfile:  /shield/data/crypt
 
 session_timeout: 8
 debug: true
